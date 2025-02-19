@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="./assets/styles/styles.css" rel="stylesheet">
+
+</head>
+<style>
+  /* Custom Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .close {
+    color: gray;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Card Styling */
+  .product-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-image:hover {
+    opacity: 0.8;
+  }
+
+  .product-info {
+    padding: 16px;
+  }
+
+  .product-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .product-btn {
+    background-color: #4a4a4a;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .product-btn:hover {
+    background-color: #3a3a3a;
+  }
+
+  .sku-container span {
+    background-color: #e1e1e1;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-right: 8px;
+    color: #333;
+  }
+
+  .text-muted {
+    color: #666;
+  }
+
+  /* Grid Layout */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 products per row */
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .sku-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+    /* Ensure the container takes up full width */
+  }
+</style>
+
+<body class="font-roboto bg-white">
+  <div class="w-full">
+
+    <!-- Navbar -->
+    <header class="bg-black bg-opacity-50 text-white px-8 py-6 fixed w-full z-10">
+      <div class="flex justify-between items-center">
+        <!-- Logo and tagline -->
+        <div>
+          <a href="/">
+            <h1 class="text-xl font-bold">
+              Sri Ramleela <span style="color: #FEF000;">Infra Solutions</span>
+            </h1>
+            <p class="text-xs md:text-sm">Your Trusted Partner for Premium Cement and Concrete Solutions</p>
+          </a>
+        </div>
+
+        <!-- Hamburger for mobile -->
+        <div class="md:hidden">
+          <button id="menu-toggle" class="focus:outline-none">
+            <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Navbar links -->
+        <nav id="nav-links" class="hidden md:flex space-x-16 text-white text-lg  mr-16">
+          <a href="/" class="hover:text-yellow-400">Home</a>
+          <a href="about.html" class="hover:text-yellow-400">About Us</a>
+          <a href="products.html" class="hover:text-yellow-400  text-yellow-400">Products</a>
+          <a href="contact.html" class="hover:text-yellow-400">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden flex-col space-y-4 mt-4">
+        <a href="/" class="block hover:text-yellow-400">Home</a>
+        <a href="about.html" class="block hover:text-yellow-400">About Us</a>
+        <a href="products.html" class="block hover:text-yellow-400 text-yellow-400">Products</a>
+        <a href="contact.html" class="block hover:text-yellow-400">Contact Us</a>
+      </div>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="relative">
+      <img src="../assets/images/product.png" alt="Construction Background" class="w-full h-[600px] object-cover">
+      <div
+        class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center text-left text-white px-8 md:px-16">
+        <h2 class="text-lg md:text-2xl font-semibold"></h2>
+        <h1 class="text-4xl md:text-6xl font-bold mt-3 anton-regular">Our Products</h1>
+        <p class="mt-4 text-base font-bold md:text-lg">Cement and building product</p>
+        <a href="#explore"
+          class="mt-6 w-36 bg-yellow-400 text-center text-black px-8 py-4 font-bold rounded-lg hover:bg-yellow-800 focus:outline-none focus:ring-2 focus:ring-yellow-600">Explore</a>
+
+      </div>
+
+    </section>
+    <!-- Hero Section -->
+    <!-- <section class="relative bg-white"> -->
+    <!-- Hero Image with margin and rounded border -->
+    <!-- <div class="relative mx-4 sm:mx-8 my-12 rounded-2xl overflow-hidden">
+        <img src="../assets/images/procuct-hero.png" alt="Hero Image" class="w-full h-full object-cover rounded-2xl"> -->
+
+    <!-- Text Content -->
+    <!-- <div class="absolute inset-0 flex flex-col justify-center items-start text-left text-white z-10 px-6 sm:px-12">
+          <h1 class="text-3xl md:text-6xl sm:text-5xl font-extrabold text-white">
+          Our Products
+          </h1>
+          <p class="text-sm md:text-3xl sm:text-2xl md:mt-2 text-yellow-400 font-semibold">
+            Feel Free To Look Around
+          </p>
+        </div>
+      </div>
+    </section> -->
+
+
+
+    <!-- ReadyMix Concrete Section -->
+    <section class="relative flex flex-col md:mt-8 md:flex-row items-center justify-center text-black">
+      <!-- Truck Image -->
+      <!-- Yellow Background and Text -->
+      <div class="flex-1 ml-0  mt-6 md:mt-0 bg-yellow-300 rounded-2xl w-full px-6 py-8 relative z-0">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl text-center md:text-center font-bold text-black mb-4">
+          We Provide Readymix Concrete
+        </h2>
+
+        <!-- Services Section -->
+        <div class="flex flex-wrap justify-center gap-4 mt-6">
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Residential Buildings
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Commercial Structures
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Roads
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Bridges
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Pavements
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Industrial Facilities
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Foundations
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Slabs
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Beams
+          </div>
+          <div class="bg-yellow-800 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg">
+            Columns
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Centered Image -->
+    <div id="explore" class="flex justify-center mt-8">
+      <img src="./assets/images/truck.png" alt="Centered Image" class="w-full max-w-md">
+    </div>
+
+
+
+
+
+
+    <section>
+      <!-- Dynamic Content Container -->
+      <div id="contentContainer" class="space-y-12 p-6 mt-8"></div>
+
+      <!-- Modal Template -->
+      <div id="productModalTemplate" class="modal">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="flex justify-between items-center border-b pb-3 mb-4">
+            <h3 class="text-lg font-bold text-gray-800">Product Details</h3>
+            <span class="close">✕</span>
+          </div>
+
+          <!-- Modal Content -->
+          <div class="modal-body">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Features</h3>
+            <ul class="list-disc pl-5 text-gray-700 mb-6"></ul>
+
+            <div class="mb-6">
+              <h3 class="text-lg font-bold text-gray-800 mb-2">SKUs</h3>
+              <div class="sku-container flex flex-wrap gap-4"></div>
+            </div>
+
+            <!-- coverage -->
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-2">Coverage</h3>
+              <p class="coverage text-gray-700"></p>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="flex justify-end mt-6">
+            <button class="closeBtn bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-8 px-4">
+      <!-- Section Heading -->
+      <h1 class="text-center text-4xl font-bold text-black mb-6">Brochures</h1>
+
+      <!-- Brochure Links -->
+      <a target="_blank"
+        href="https://www.ultratechcement.com/content/dam/ultratechcementwebsite/pdf/greenvantage-brochure.pdf"
+        class="flex items-center justify-between text-center text-2xl font-bold bg-white text-black py-3 px-4 rounded border border-gray-300 hover:bg-yellow-300 hover:text-black transition-colors mb-4">
+        <span class="flex items-center">
+          <i class="fas fa-file-alt mr-3"></i> UltraTech Green Vantage
+        </span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+
+      <a target="_blank"
+        href="https://5.imimg.com/data5/SELLER/Doc/2022/7/QD/DR/MB/42446133/50-kg-ultra-tech-cement.pdf"
+        class="flex items-center justify-between text-center text-2xl font-bold bg-white text-black py-3 px-4 rounded border border-gray-300 hover:bg-yellow-300 hover:text-black transition-colors mb-4">
+        <span class="flex items-center">
+          <i class="fas fa-file-alt mr-3"></i> UltraTech Cement
+        </span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+
+      <a target="_blank"
+        href="https://www.ultratechcement.com/content/dam/ultratechcementwebsite/products/vac-product-brochure/vac-brochure-zip.pdf"
+        class="flex items-center justify-between text-center text-2xl font-bold bg-white text-black py-3 px-4 rounded border border-gray-300 hover:bg-yellow-300 hover:text-black transition-colors mb-4">
+        <span class="flex items-center">
+          <i class="fas fa-file-alt mr-3"></i> Products Brochure
+        </span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+
+      <a target="_blank"
+        href="https://www.ultratechcement.com/content/dam/ultratechcementwebsite/products/vac-product-brochure/05-vac-e-brochure-ifloors.pdf"
+        class="flex items-center justify-between text-center text-2xl font-bold bg-white text-black py-3 px-4 rounded border border-gray-300 hover:bg-yellow-300 hover:text-black transition-colors mb-4">
+        <span class="flex items-center">
+          <i class="fas fa-file-alt mr-3"></i> VAC Product Brochure
+        </span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+
+      <a target="_blank" href="https://5.imimg.com/data5/RL/AQ/MY-10974491/ultratech-cement.pdf"
+        class="flex items-center justify-between text-center text-2xl font-bold bg-white text-black py-3 px-4 rounded border border-gray-300 hover:bg-yellow-300 hover:text-black transition-colors">
+        <span class="flex items-center">
+          <i class="fas fa-file-alt mr-3"></i> UltraTech Cement Products
+        </span>
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </section>
+
+
+
+
+  </div>
+  <footer class="bg-black text-white py-10">
+    <div class="container mx-auto px-6 lg:px-20">
+      <!-- Footer Top -->
+      <div class="flex flex-wrap justify-between">
+        <!-- Company Info Section -->
+        <div class="w-full md:w-1/3 mb-8 md:mb-0">
+          <!-- <h2 class="text-3xl font-bold mb-3">Sriramleela Infrasolutions</h2> -->
+          <h2 class="text-2xl font-bold">
+            Sri Ramleela <span style="color: #FEF000;">Infra Solutions</span>
+
+          </h2>
+          <p class="text-sm mb-4">We provide the best services to help your business grow.<br> Focused on innovation,
+            reliability, and customer satisfaction.</p>
+          <p class="text-lg font-bold mb-4 flex items-center">
+            <i>Authorized Distributer for</i>
+            <span class="ml-2">
+              <img src="./assets/images/footer-ultratech.png" class="h-8 w-auto">
+            </span>
+          </p>
+
+          <!-- Social Media Icons -->
+          <!-- <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div> -->
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="w-full md:w-1/3 mb-8 md:mb-0">
+          <h3 class="text-lg font-semibold mb-3" style="color: #FEF000;">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="/" class="text-lg hover:text-gray-400">Home</a></li>
+            <li><a href="about.html" class="text-lg hover:text-gray-400">About Us</a></li>
+            <li><a href="products.html" class="text-lg hover:text-gray-400">Products</a></li>
+            <li><a href="contact.html" class="text-lg hover:text-gray-400">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Location & Contact Section -->
+        <div class="w-full md:w-1/3">
+          <h3 class="text-lg font-semibold mb-3 " style="color: #FEF000;">Office</h3>
+          <p class="text-lg">Ground Floor, 43D, 11/2 2nd Main, Shreya Nagar, M.T. Sagar, Gokul Road, Hubballi-580030</p>
+          <p class="text-lg">GSTIN: 29EPGPS8476P1ZH</p>
+          <p class="text-lg">Email: sriramleelais@gmail.com</p>
+          <p class="text-lg">Phone: +91 8762658417,+91 7795188079</p>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <!-- Footer Bottom -->
+      <div class="mt-10 flex flex-col md:flex-row items-center justify-between border-t pt-6">
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <img src="./assets/images/ciresta-logo.svg" alt="Logo" class="h-6">
+          <a href="https://www.ciresta.in" target="_blank">
+            <span class="text-sm text-[#6a6a71]">Powered by Ciresta Technologies</span>
+          </a>
+        </div>
+        <p class="text-sm text-center md:text-right">&copy; 2024 Sriramleela Infrasolutions. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+<script>
+  document.getElementById("menu-toggle").addEventListener("click", function () {
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
+<script>
+  const categories = {
+    "WATERPROOFING": [
+      {
+        id: 1,
+        name: "UltraTech WEATHER PRO WP+200 ",
+        image: "./assets/images/products/waterproofing/w0.png",
+        features: [
+          "Better dampness prevention",
+          "Better prevention from rusting",
+          "Higher durability",
+          "Enhances concrete strength",
+          "Reduces water cement ratio"
+        ],
+
+        skus: ["200 ml", "1 L", "5 L", "10 L", "20 L", "50 L", "100 L"],
+        coverage: "200 ml per 50 kg bag of cement."
+      },
+      {
+        id: 2,
+        name: "UltraTech Seal & Dry SBR",
+        image: "./assets/images/products/waterproofing/w2.png",
+        features: [
+          "Prevents leakage/seepage issues",
+          "High solid content ensures better cohesiveness",
+          "High coverage and tackiness time",
+          "Strong bonding for old and new concrete/plaster layers",
+          "Improves properties of concrete/mortar",
+          "Enhances durability"
+        ],
+        skus: ["200 g", "1 kg", "5 kg", "10 kg", "20 kg", "50 kg"],
+        coverage: "40-45 sq.ft. (1mm thickness, waterproofing), 12-15 sq.ft. (2mm thickness, bonding). Varies with mortar/concrete mix."
+      },
+      {
+        id: 3,
+        name: "UltraTech Seal & Dry 5 Plus",
+        image: "./assets/images/products/waterproofing/w3.png",
+        features: [
+          "High solid content ensures excellent bonding",
+          "Prevents leakage/seepage issues",
+          "Provides toughness and flexibility",
+          "Easy to use",
+          "Excellent anti-corrosive properties",
+          "Ideal for repair and renovation"
+        ],
+        skus: ["1 kg", "5 kg", "10 kg", "20 kg"],
+        coverage: "40-45 sq.ft. (Waterproofing), 75 RMT (Bar coating), 75 sq.ft. (Priming), 12-15 sq.ft. (Bonding), 85 RMT (Crack-filling)."
+      },
+      // {
+      //   id: 4,
+      //   name: "UltraTech Seal & Dry",
+      //   image: "./assets/images/products/waterproofing/w4.png",
+      //   features: [
+      //     "Single component; easy to use",
+      //     "Prevents leakage/seepage issues",
+      //     "Faster completion of work",
+      //     "Eco-friendly product",
+      //     "Excellent adhesion to substrate",
+      //     "Consistent quality using graded sand and additives"
+      //   ],
+      //   skus: ["1 kg", "5 kg", "25 kg"],
+      //   coverage: "10-12 sq.ft. in 2 coats (each 0.6-0.8 mm)."
+      // },
+      {
+        id: 5,
+        name: "UltraTech Seal & Dry FLEX",
+        image: "./assets/images/products/waterproofing/w5.png",
+        features: [
+          "Over 50% elongation ensures excellent flexibility",
+          "Two-component and easy to use",
+          "Fast application with brush consistency",
+          "Excellent adhesion to substrate",
+          "Durable waterproofing for water-prone areas"
+        ],
+        skus: ["3 kg", "15 kg", "30 kg"],
+        coverage: "12-14 sq.ft. @ 1.2-1.5 mm DFT in 2 coats."
+      },
+      {
+        id: 6,
+        name: "UltraTech Seal & Dry Hi-FLEX",
+        image: "./assets/images/products/waterproofing/w6.png",
+        features: [
+          "Over 100% elongation for exceptional flexibility",
+          "Water-resistant up to 7 bars @ 1mm DFT",
+          "Excellent adhesion and breathability",
+          "High chemical resistance against domestic water",
+          "Durable for demanding applications"
+        ],
+        skus: ["12 kg", "24 kg"],
+        coverage: "14-15 sq.ft. @ 1.2-1.5 mm DFT in 2 coats."
+      }
+    ],
+    "TILE ADHESIVE": [
+      {
+        id: 7,
+        name: "UltraTech TileFixo CT",
+        image: "./assets/images/products/tile/t1.png",
+        features: [
+          "Self-curing and easy to use",
+          "Interior applications",
+          "High durability with extended open time",
+          "Ideal for thin bed floor and wall tiling"
+        ],
+        skus: ["20 kg", "40 kg"],
+        coverage: "(Coverage / 20 kg Bag) 80 sq.ft. @ 3mm thickness per 20 kg bag."
+      },
+      {
+        id: 8,
+        name: "UltraTech TileFixo VT",
+        image: "./assets/images/products/tile/t2.png",
+        features: [
+          "Self-curing and easy to use",
+          "High slip resistance for small format tiles",
+          "Interior applications",
+          "Extended open time for easier application"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 80 sq.ft. @ 3mm thickness per 20 kg bag."
+      },
+      {
+        id: 9,
+        name: "UltraTech TileFixo VT White",
+        image: "./assets/images/products/tile/t3.png",
+        features: [
+          "Self-curing and easy to use",
+          "High slip resistance",
+          "Interior applications",
+          "Enhanced durability for small format Italian marble and tiles",
+          "Provides a superior white base for translucence"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 80 sq.ft. @ 3mm thickness per 20 kg bag."
+      },
+      {
+        id: 10,
+        name: "UltraTech TileFixo NT",
+        image: "./assets/images/products/tile/t4.png",
+        features: [
+          "Self-curing and easy to use",
+          "High durability for vitrified tiles and glass mosaics",
+          "Interior and exterior applications",
+          "Extended open time for easier tile fixing"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 40 sq.ft. @ 6mm thickness per 20 kg bag."
+      },
+      {
+        id: 11,
+        name: "UltraTech TileFixo YT",
+        image: "./assets/images/products/tile/t5.png",
+        features: [
+          "Self-curing and easy to use",
+          "Provides superior white base for Italian marble and tiles",
+          "High slip resistance for glass mosaics and translucent tiles",
+          "Interior and exterior applications"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 40 sq.ft. @ 6mm thickness per 20 kg bag."
+      },
+      {
+        id: 12,
+        name: "UltraTech TileFixo X’tra Plus",
+        image: "./assets/images/products/tile/t6.png",
+        features: [
+          "Self-curing and easy to use",
+          "Flexible adhesive withstands low to medium vibrations",
+          "High durability for large format tiles and natural stones",
+          "Interior and exterior applications"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 40 sq.ft. @ 6mm thickness per 20 kg bag."
+      },
+      {
+        id: 13,
+        name: "UltraTech TileFixo X’tra Plus White",
+        image: "./assets/images/products/tile/t7.png",
+        features: [
+          "Self-curing and easy to use",
+          "Interior & exterior challenging applications",
+          "Suitable for varied substrates",
+          "High slip resistance"
+        ],
+        skus: ["20 kg"],
+        coverage: "(Coverage / 20 kg Bag) 40 sq.ft. @ 6mm thickness per 20 kg bag."
+      }
+    ],
+    // "TILE GROUT": [
+    //   {
+    //     id: 14,
+    //     name: "UltraTech TileFixo Grout CG",
+    //     image: "./assets/images/products/groot/g1.png",
+    //     features: [
+    //       "Reduces water absorption",
+    //       "Single component; easy to use",
+    //       "Self-curing",
+    //       "Provides a uniform color finish",
+    //       "Reduces shrinkage",
+    //       "Enhances durability"
+    //     ],
+    //     skus: ["1 kg"],
+    //     coverage: "85 RMT @ 6mm x 6mm joints per kg."
+    //   }
+    // ],
+    "REPAIR & REHABILITATION": [
+      // {
+      //   id: 15,
+      //   name: "UltraTech TileFixo X’tra Plus White",
+      //   image: "./assets/images/products/repair/r1.png",
+      //   features: [
+      //     "Self-curing and easy to use",
+      //     "High durability for large format Italian marble and translucent tiles",
+      //     "Flexible adhesive for low to medium vibrations",
+      //     "Suitable for varied substrates",
+      //     "High slip resistance"
+      //   ],
+      //   skus: ["20 kg"],
+      //   coverage: "40 sq.ft. @ 6mm thickness per 20 kg bag."
+      // },
+      {
+        id: 16,
+        name: "UltraTech Microkrete HS2",
+        image: "./assets/images/products/repair/r1.png",
+        features: [
+          "High compressive strength (60 MPa)",
+          "Single component; easy to use",
+          "Nil wastage",
+          "Economical and better yield",
+          "Excellent adhesion and binding properties",
+          "Enhances durability"
+        ],
+        skus: ["40 kg"],
+        coverage: "(Yield / 40 kg Bag) 20 L yield at 14% water-to-powder ratio per 40 kg bag."
+      },
+      {
+        id: 17,
+        name: "UltraTech Basekrete HP",
+        image: "./assets/images/products/repair/r2.png",
+        features: [
+          "Excellent adhesion and compressive strength",
+          "Single component; easy to use",
+          "High performance for structural repairs",
+          "Well-graded sand ensures consistent quality",
+          "Enhances durability",
+          "Thixotropic mortar suitable for overhead and vertical surfaces"
+        ],
+        skus: ["40 kg"],
+        coverage: "As per application thickness (10-50 mm)."
+      },
+      {
+        id: 18,
+        name: "UltraTech Basekrete HS2",
+        image: "./assets/images/products/repair/r3.png",
+        features: [
+          "Provides excellent adhesion",
+          "High compressive strength",
+          "Well-graded sand ensures consistent quality",
+          "Single component; easy to use",
+          "Enhances durability",
+          "Suitable for thick bed plastering applications"
+        ],
+        skus: ["40 kg"],
+        coverage: "(Coverage / 40 kg Bag) 16 sq.ft. @ 12mm thickness per 40 kg bag."
+      },
+      {
+        id: 19,
+        name: "UltraTech Mykrofill",
+        image: "./assets/images/products/repair/r4.png",
+        features: [
+          "High fluidity for easy application",
+          "Prevents corrosion and rust in steel",
+          "Single component; easy to use",
+          "Nil plastic shrinkage",
+          "Strength up to 30 MPa",
+          "Enhances durability"
+        ],
+        skus: ["25 kg"],
+        coverage: "At actuals, depending on application needs."
+      },
+
+    ],
+    "PLASTER & MORTAR": [
+
+      {
+        id: 20,
+        name: "UltraTech Super Stucco",
+        image: "./assets/images/products/plaster/p1.png",
+        features: [
+          "Self-curing for reduced water usage",
+          "Excellent adhesion and least rebound loss",
+          "Convenient application",
+          "Uniform and smooth finish for walls",
+          "Fast completion of work",
+          "Eco-friendly, with negligible wastage"
+        ],
+        skus: ["25 kg"],
+        coverage: "60 sq.ft. @ 3mm thickness per 25 kg bag."
+      },
+      {
+        id: 21,
+        name: "UltraTech Readiplast RP",
+        image: "./assets/images/products/plaster/p2.png",
+        features: [
+          "Reduces water absorption",
+          "Needs less curing than traditional plaster",
+          "Strong adhesion with consistent quality",
+          "Uniform and smooth finish for walls",
+          "Faster work completion",
+          "Suitable for masonry and RCC surfaces"
+        ],
+        skus: ["40 kg"],
+        coverage: "18 sq.ft. @ 12mm thickness per 40 kg bag."
+      },
+      // {
+      //   id: 22,
+      //   name: "UltraTech Fixoblock",
+      //   image: "./assets/images/products/plaster/p3.png",
+      //   features: [
+      //     "High tensile adhesion strength at joints",
+      //     "Thin bed joints for precise alignment",
+      //     "Self-curing and economical",
+      //     "Higher coverage and faster application",
+      //     "Excellent bonding strength for AAC blocks and bricks"
+      //   ],
+      //   skus: ["40 kg"],
+      //   coverage: "210-230 sq.ft. for blocks of size 600 x 200 x 75 mm."
+      // }
+    ],
+    "INDUSTRIAL AND PRECISION GROUT": [
+      {
+        id: 23,
+        name: "UltraTech Powergrout NS1",
+        image: "./assets/images/products/industrial/i1.png",
+        features: [
+          "Ready-to-mix, single component product",
+          "Non-shrink, non-expandable grout",
+          "Self-compacting in nature for precision grouting",
+          "Excellent compressive strength (100 MPa)",
+          "Minimal wastage and enhanced durability"
+        ],
+        skus: ["40 kg"],
+        coverage: "19-20 L yield at 16% water-to-powder ratio per 40 kg bag."
+      },
+      {
+        id: 24,
+        name: "UltraTech Powergrout NS2",
+        image: "./assets/images/products/industrial/i2.png",
+        features: [
+          "High early strength and excellent compressive strength (80 MPa)",
+          "Ready-to-mix, single component product",
+          "Self-compacting and non-shrink grout",
+          "Durable and easy to mix",
+          "Suitable for heavy machinery foundations and structural grouting"
+        ],
+        skus: ["40 kg"],
+        coverage: "19-20 L yield at 15% water-to-powder ratio per 40 kg bag."
+      },
+      {
+        id: 25,
+        name: "UltraTech Powergrout NS3",
+        image: "./assets/images/products/industrial/i3.png",
+        features: [
+          "High compressive strength (60 MPa)",
+          "Non-shrink, non-expandable grout",
+          "Ready-to-mix, single component product",
+          "Self-compacting in nature for precision grouting",
+          "Minimal wastage and long pot life"
+        ],
+        skus: ["40 kg"],
+        coverage: "19-20 L yield at 15% water-to-powder ratio per 40 kg bag."
+      },
+      {
+        id: 26,
+        name: "UltraTech Powergrout PGM",
+        image: "./assets/images/products/industrial/i4.png",
+        features: [
+          "Ensures waterproof joints/holes",
+          "Self-curing and easy to use",
+          "Provides uniform and smooth finish",
+          "Negligible wastage",
+          "No shrinkage for consistent results",
+          "Faster application due to pumpability"
+        ],
+        skus: ["25 kg"],
+        coverage: "325-350 holes @ 6mm dia & 300mm depth per 25 kg bag."
+      }
+    ],
+    "FLOORING SCREED": [
+      {
+        id: 27,
+        name: "UltraTech Floorkrete HS2",
+        image: "./assets/images/products/floor/f1.png",
+        features: [
+          "Excellent adhesion and compressive strength",
+          "Ready-to-use mortar with negligible wastage",
+          "Fast application for floor screeds",
+          "Durable and economical",
+          "Smooth and hardened finish for floors"
+        ],
+        skus: ["40 kg"],
+        coverage: "15 sq.ft. @ 15mm thickness per 40 kg bag."
+      }
+    ],
+    "LIGHT WEIGHT AAC BLOCK": [
+      {
+        id: 28,
+        name: "UltraTech X’tralite AAC Block",
+        image: "./assets/images/products/block/b1.png",
+        features: [
+          "Lightweight blocks reduce dead load on structures",
+          "Compressive strength as per IS 2185 grade 1",
+          "Highly durable and energy-efficient",
+          "Fire-resistant and sound-insulating properties",
+          "Economical and faster construction"
+        ],
+        skus: ["600mm x 200mm x (75 to 300mm)"],
+        coverage: "Size-specific, varies with application."
+      },
+      // {
+      //   id: 29,
+      //   name: "UltraTech Basekrete HS2",
+      //   image: "./assets/images/products/repair/r3.png",
+      //   features: [
+      //     "Provides excellent adhesion",
+      //     "High compressive strength",
+      //     "Well-graded sand ensures consistent quality",
+      //     "Single component; easy to use",
+      //     "Enhances durability",
+      //     "Suitable for thick bed plastering applications"
+      //   ],
+      //   skus: ["40 kg"],
+      //   coverage: "(Coverage / 40 kg Bag) 16 sq.ft. @ 12mm thickness per 40 kg bag."
+      // }
+      {
+        id: 29,
+        name: "UltraTech Fixoblock",
+        image: "./assets/images/products/plaster/p3.png",
+        features: [
+          "High tensile adhesion strength at joints",
+          "Thin bed joints for precise alignment",
+          "Self-curing and economical",
+          "Higher coverage and faster application",
+          "Excellent bonding strength for AAC blocks and bricks"
+        ],
+        skus: ["40 kg"],
+        coverage: "210-230 sq.ft. for blocks of size 600 x 200 x 75 mm."
+      }
+    ],
+  };
+  const contentContainer = document.getElementById('contentContainer');
+  const modalTemplate = document.getElementById('productModalTemplate');
+  const subheadings = [
+    'Widely used in the construction of residential buildings, commercial structures, roads, bridges, pavements, and industrial facilities, foundations, slabs, beams, and columns.',
+    'Securely fixing tiles to walls and floors, ensuring a long-lasting finish.',
+    'Innovative products designed for every need.',
+    'Specialized materials for repairing and rehabilitating damaged structures',
+    'Solutions for smooth surfaces and strong bonding',
+    'Precision-engineered grouts for industrial applications',
+    'Durable screed solutions for leveling and finishing floors, ideal for creating smooth, even surfaces',
+    'lightweight Autoclaved Aerated Concrete (AAC) blocks for cost-effective, quick, and sustainable construction.'
+  ];
+
+  // Render categories and products
+  Object.keys(categories).forEach((category, index) => {
+    // Create a container for the category heading and subheading
+    const categoryContainer = document.createElement('div');
+    categoryContainer.className = 'mb-6 bg-[#ffed00] rounded-3xl p-4'; // Adds margin to the bottom and padding for better spacing
+
+    // Add category heading (h2)
+    const categoryHeading = document.createElement('h2');
+    categoryHeading.textContent = category;
+    categoryHeading.className = 'text-4xl font-bold mb-2 flex align-center justify-center items-center rounded-3xl h-16';
+
+    // Add dynamic subheading from the subheadings array based on the index
+    const categorySubText = document.createElement('p');
+    categorySubText.style.fontStyle = "italic";
+    categorySubText.textContent = subheadings[index]; // Get the subheading based on the index
+    categorySubText.className = 'text-sm text-black font-bold mt-[-12px] text-center'; // Small text below category heading
+
+    // Append both the category heading and subheading to the category container
+    categoryContainer.appendChild(categoryHeading);
+    categoryContainer.appendChild(categorySubText);
+
+    // Add the category container to the content container
+    contentContainer.appendChild(categoryContainer);
+
+    // Add products for each category
+    const productGrid = document.createElement('div');
+    productGrid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'; // Responsive grid
+
+    categories[category].forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+
+      // Add product image
+      const productImage = `
+    <img src="${product.image}" alt="${product.name}" class="product-image">
+  `;
+
+      // Add product details
+      const productDetails = `
+    <div class="product-info">
+        <h3 class="product-title">${product.name}</h3>
+        <div class="text-muted mb-4">
+            <strong>SKUs:</strong>
+            <div class="sku-container flex flex-wrap gap-4">
+                ${product.skus.map(sku => `
+                    <span class="bg-gray-100 px-3 py-1 rounded text-sm shadow">${sku}</span>
+                `).join('')}
+            </div>
+        </div>
+        <p><strong>Coverage:</strong> ${product.coverage}</p>
+        <button class="showModalBtn product-btn" data-product-id="${product.id}">
+            Show Details
+        </button>
+    </div>
+  `;
+
+      productCard.innerHTML = productImage + productDetails;
+      productGrid.appendChild(productCard);
+    });
+
+    // Append the product grid under the category
+    contentContainer.appendChild(productGrid);
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get all buttons with the "showModalBtn" class
+    const showModalButtons = document.querySelectorAll('.showModalBtn');
+    const modalTemplate = document.getElementById('productModalTemplate');
+
+    // Add click event listeners to each button
+    showModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const productId = button.getAttribute('data-product-id');
+
+        // Populate modal content based on product ID (if required)
+        // Example: Fetch product details from a global object or API
+        const product = Object.values(categories).flat().find(p => p.id === parseInt(productId));
+        if (product) {
+          modalTemplate.querySelector('.modal-body h3').textContent = product.name;
+          modalTemplate.querySelector('.modal-body ul').innerHTML = product.features.map(feature => `<li>${feature}</li>`).join('');
+          modalTemplate.querySelector('.sku-container').innerHTML = product.skus.map(sku => `<span>${sku}</span>`).join('');
+          modalTemplate.querySelector('.coverage').textContent = product.coverage;
+        }
+
+        // Show the modal
+        modalTemplate.classList.add('active');
+      });
+    });
+
+    // Close modal on click of "close" button or background
+    const closeModalActions = () => modalTemplate.classList.remove('active');
+    modalTemplate.querySelector('.close').addEventListener('click', closeModalActions);
+    modalTemplate.querySelector('.closeBtn').addEventListener('click', closeModalActions);
+    modalTemplate.addEventListener('click', e => {
+      if (e.target === modalTemplate) closeModalActions(); // Close modal if background is clicked
+    });
+  });
+
+</script>
+
+</html>

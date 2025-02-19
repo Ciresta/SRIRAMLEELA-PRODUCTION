@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Carousel and Text</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add a small script for the carousel -->
+    <script>
+        let currentImage = 0;
+        const images = [
+            './assets/images/home-bag/grey.png',
+            './assets/images/home-bag/slag.png',
+            './assets/images/home-bag/portland.png'
+        ];
+
+        function changeImage() {
+            const imgElement = document.getElementById('carousel-image');
+            currentImage = (currentImage + 1) % images.length;
+            imgElement.src = images[currentImage];
+        }
+
+        // Change the image every 3 seconds
+        setInterval(changeImage, 3000);
+    </script>
+</head>
+
+<body class="bg-cover bg-no-repeat bg-center bg-gray-100"
+    style="background-image: url('./assets/images/bg5.png');">
+
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0 md:space-x-4 p-6">
+        <!-- Left Section - Text -->
+        <div class="w-full md:w-1/2 text-center md:text-left">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-4">About our Product</h2>
+            <p class="text-sm sm:text-base lg:text-lg text-gray-700">
+                UltraTech Cement, a flagship brand of the Aditya Birla Group, is India’s largest producer of grey cement, white cement, and ready-mix concrete (RMC), Renowned for its superior quality, durability, and innovation, UltraTech offers specialized solutions for all construction needs. With a strong focus on sustainability, it ensures reliable, eco-friendly products for residential, commercial, and industrial projects worldwide
+            </p>
+        </div>
+
+        <!-- Right Section - Image Carousel -->
+        <div class="w-full md:w-1/2 flex justify-center">
+            <img id="carousel-image" src="./assets/images/home-bag/grey.png"
+                alt="Image Carousel" class="w-full max-w-2xl h-auto object-cover">
+        </div>
+    </div>
+
+</body>
+
+</html>
